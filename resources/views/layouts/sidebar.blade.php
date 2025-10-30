@@ -1,4 +1,4 @@
-<div class="navbar-vertical navbar">
+<div class="navbar navbar-vertical navbar-expand-lg">
     <div class="navbar-brand navbar-vertical-brand">
         <a href="{{ route('dashboard') }}" class="navbar-brand-link">
             {{-- <img src="{{ asset('images/logo.svg') }}" alt="HelpDesk" class="navbar-brand-image"> --}}
@@ -148,6 +148,14 @@
                             </span>
                         </a>
                     </li>
+<li class="nav-item">
+                                        <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); this.closest('form').submit();">
+                            Logout
+                        </a>
+                    </form>
+</li>
                 </ul>
             </div>
         </div>
