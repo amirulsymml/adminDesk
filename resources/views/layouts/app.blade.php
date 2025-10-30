@@ -41,13 +41,13 @@
     </head>
     <body class="antialiased">
         <!-- Loading indicator -->
-        <div class="page-loading d-flex align-items-center justify-content-center bg-white bg-opacity-75 position-fixed top-0 left-0 w-100 h-100" style="display: none; z-index: 9999;">
+        <!-- <div class="page-loading d-flex align-items-center justify-content-center bg-white bg-opacity-75 position-fixed top-0 left-0 w-100 h-100" style="display: none; z-index: 9999;">
             <div class="page-loading-content">
                 <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
                     <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         @include('layouts.sidebar')
         
