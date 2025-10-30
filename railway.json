@@ -3,7 +3,7 @@
     "build": {
         "builder": "NIXPACKS",
         "nixpacksConfig": {
-            "providers": ["php", "node"],
+            "providers": ["php", "node@22"],
             "buildCmd": "npm install && npm run build && composer install --no-dev --optimize-autoloader"
         }
     },
