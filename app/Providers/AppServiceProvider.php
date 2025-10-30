@@ -20,7 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if ($this->app->environment("production")) {
+        // Fix for mixed content issue when running in HTTPS
+        if (
+            $this->app->environment("production") ||
+            $this->app->environment("staging")
+        ) {
             URL::forceScheme("https");
         }
     }
