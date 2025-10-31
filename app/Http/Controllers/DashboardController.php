@@ -13,9 +13,17 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $openTickets = Ticket::where('status_id', 1)->count(); // Assuming 1 is the ID for Open status
-        $pendingTickets = Ticket::where('status_id', 2)->count(); // Assuming 2 is the ID for Pending status
-        $closedTickets = Ticket::where('status_id', 3)->count(); // Assuming 3 is the ID for Closed status
+        $openTickets = Ticket::whereHas('status', function ($q) {
+            $q->where('slug', 'open');
+        })->count();
+
+        $pendingTickets = Ticket::whereHas('status', function ($q) {
+            $q->where('slug', 'pending');
+        })->count();
+
+        $closedTickets = Ticket::whereHas('status', function ($q) {
+            $q->where('slug', 'closed');
+        })->count();
 
         $ticketsByStatus = Status::withCount('tickets')->get();
         $ticketsByDepartment = Department::withCount('tickets')->get();

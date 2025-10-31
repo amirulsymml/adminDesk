@@ -31,7 +31,7 @@ class PriorityController extends Controller
     {
         Priority::create($request->validated());
 
-        return redirect()->route('priorities.index')->with('success', 'Priority created successfully.');
+        return redirect()->route('admin.priorities.index')->with('success', 'Priority created successfully.');
     }
 
     /**
@@ -57,7 +57,7 @@ class PriorityController extends Controller
     {
         $priority->update($request->validated());
 
-        return redirect()->route('priorities.index')->with('success', 'Priority updated successfully.');
+        return redirect()->route('admin.priorities.index')->with('success', 'Priority updated successfully.');
     }
 
     /**
@@ -67,6 +67,6 @@ class PriorityController extends Controller
     {
         $priority->delete();
 
-        return redirect()->route('priorities.index')->with('success', 'Priority deleted successfully.');
+        return redirect()->route('admin.priorities.index')->with('success', 'Priority deleted successfully.');
     }
 }

@@ -28,18 +28,12 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="mb-3">
-                                            <label class="block font-medium text-sm text-gray-700">
-                                                Name
-                                            </label>
-                                            <div class="mt-1">
-                                                <input type="text" name="name" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" placeholder="Department Name" autocomplete="off" value="{{ old('name', $department->name) }}">
-                                            </div>
-                                            @error('name')
-                                                <div class="text-danger small mt-1">{{ $message }}</div>
-                                            @enderror
+                                            <x-input-label for="name" :value="__('Name')" />
+                                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" placeholder="Department Name" autocomplete="off" value="{{ old('name', $department->name) }}" />
+                                            <x-input-error class="mt-2" :messages="$errors->get('name')" />
                                         </div>
                                         <div class="flex items-center justify-end mt-4">
-                                            <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Update</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </form>
                                 </div>

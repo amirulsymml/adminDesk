@@ -1,6 +1,6 @@
 <div class="comments-section mt-4">
     @foreach($comments as $comment)
-        @if(!$comment->is_internal || (Auth::check() && (Auth::user()->role === 'admin' || Auth::user()->role === 'agent')))
+        @if(!$comment->is_internal || (Auth::check() && Auth::user()->role === 'admin'))
             <div class="card mb-3">
                 <div class="card-header d-flex align-items-center">
                     <h4 class="card-title mb-0">{{ $comment->user->first_name }} {{ $comment->user->last_name }}</h4>

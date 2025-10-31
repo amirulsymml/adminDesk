@@ -1,6 +1,12 @@
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Ticket #') }}{{ $ticket->id }} - {{ $ticket->subject }}
+        </h2>
+    </x-slot>
 
-@section('content')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 <div class="page-header d-print-none">
     <div class="container-xl">
         <div class="row g-2 align-items-center">
@@ -23,12 +29,12 @@
                     <div class="card-body">
                         <p><strong>Subject:</strong> {{ $ticket->subject }}</p>
                         <p><strong>Description:</strong> {{ $ticket->description }}</p>
-                        <p><strong>Status:</strong> <span class="badge bg-{{ strtolower($ticket->status->name) }}">{{ $ticket->status->name }}</span></p>
-                        <p><strong>Priority:</strong> <span class="badge bg-{{ strtolower($ticket->priority->name) }}">{{ $ticket->priority->name }}</span></p>
-                        <p><strong>Type:</strong> <span class="badge bg-{{ strtolower($ticket->type->name) }}">{{ $ticket->type->name }}</span></p>
-                        <p><strong>Department:</strong> {{ $ticket->department->name }}</p>
-                        <p><strong>Category:</strong> {{ $ticket->category->name }}</p>
-                        <p><strong>Customer:</strong> {{ $ticket->customer->first_name }} {{ $ticket->customer->last_name }}</p>
+                        <p><strong>Status:</strong> <span class="badge bg-{{ strtolower($ticket->status?->name) }}">{{ $ticket->status?->name }}</span></p>
+                        <p><strong>Priority:</strong> <span class="badge bg-{{ strtolower($ticket->priority?->name) }}">{{ $ticket->priority?->name }}</span></p>
+                        <p><strong>Type:</strong> <span class="badge bg-{{ strtolower($ticket->type?->name) }}">{{ $ticket->type?->name }}</span></p>
+                        <p><strong>Department:</strong> {{ $ticket->department?->name }}</p>
+                        <p><strong>Category:</strong> {{ $ticket->category?->name }}</p>
+                        <p><strong>Customer:</strong> {{ $ticket->customer?->first_name }} {{ $ticket->customer?->last_name }}</p>
                         <p><strong>Created At:</strong> {{ $ticket->created_at->format('M d, Y H:i A') }}</p>
                         <p><strong>Last Updated:</strong> {{ $ticket->updated_at->format('M d, Y H:i A') }}</p>
                     </div>
@@ -50,7 +56,7 @@
                         <h3 class="card-title">Attachments</h3>
                     </div>
                     <div class="card-body">
-                        @include('tickets.partials._attachments')
+                        @include('tickets.partials._attachments', ['attachments' => $ticket->attachments])
                         @include('tickets.partials._add_attachment_form')
                     </div>
                 </div>
@@ -68,4 +74,6 @@
         </div>
     </div>
 </div>
-@endsection
+        </div>
+    </div>
+</x-app-layout>

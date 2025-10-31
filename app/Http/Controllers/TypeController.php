@@ -31,7 +31,7 @@ class TypeController extends Controller
     {
         Type::create($request->validated());
 
-        return redirect()->route('types.index')->with('success', 'Type created successfully.');
+        return redirect()->route('admin.types.index')->with('success', 'Type created successfully.');
     }
 
     /**
@@ -57,7 +57,7 @@ class TypeController extends Controller
     {
         $type->update($request->validated());
 
-        return redirect()->route('types.index')->with('success', 'Type updated successfully.');
+        return redirect()->route('admin.types.index')->with('success', 'Type updated successfully.');
     }
 
     /**
@@ -67,6 +67,6 @@ class TypeController extends Controller
     {
         $type->delete();
 
-        return redirect()->route('types.index')->with('success', 'Type deleted successfully.');
+        return redirect()->route('admin.types.index')->with('success', 'Type deleted successfully.');
     }
 }

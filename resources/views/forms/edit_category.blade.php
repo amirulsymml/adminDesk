@@ -28,34 +28,24 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="mb-3">
-                                            <label class="form-label">
-                                                Select Department
-                                            </label>
-                                            <select class="form-select" name="department_id" required>
+                                            <x-input-label for="department_id" :value="__('Select Department')" />
+                                            <x-select id="department_id" name="department_id" class="mt-1 block w-full" required>
                                                 <option value="">Choose department</option>
                                                 @foreach($departments as $department)
                                                     <option value="{{ $department->id }}" {{ old('department_id', $category->department_id) == $department->id ? 'selected' : '' }}>
                                                         {{ $department->name }}
                                                     </option>
                                                 @endforeach
-                                            </select>
-                                            @error('department_id')
-                                                <div class="text-danger small mt-1">{{ $message }}</div>
-                                            @enderror
+                                            </x-select>
+                                            <x-input-error class="mt-2" :messages="$errors->get('department_id')" />
                                         </div>
                                         <div class="mb-2">
-                                            <label class="form-label">
-                                                Name
-                                            </label>
-                                            <div class="input-group input-group-flat">
-                                                <input type="text" name="name" class="form-control" placeholder="Category Name" autocomplete="off" value="{{ old('name', $category->name) }}">
-                                            </div>
-                                            @error('name')
-                                                <div class="text-danger small mt-1">{{ $message }}</div>
-                                            @enderror
+                                            <x-input-label for="name" :value="__('Name')" />
+                                            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" placeholder="Category Name" autocomplete="off" value="{{ old('name', $category->name) }}" />
+                                            <x-input-error class="mt-2" :messages="$errors->get('name')" />
                                         </div>
-                                        <div class="form-footer">
-                                            <button type="submit" class="btn btn-primary w-100">Update</button>
+                                        <div class="flex items-center justify-end mt-4">
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </form>
                                 </div>

@@ -13,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(10);
         $departments = Department::all(); // Fetch departments for the dropdown
         return view('configuration.category', compact('categories', 'departments'));
     }

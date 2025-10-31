@@ -9,10 +9,14 @@ use App\Http\Controllers\PriorityController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AttachmentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('login');
 });
 
 // Public authentication routes
@@ -34,14 +38,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Ticket management (accessible to all authenticated users)
     Route::resource('tickets', TicketController::class);
     Route::post('tickets/{ticket}/comments', [\App\Http\Controllers\CommentController::class, 'store'])->name('tickets.comments.store');
+    Route::post('tickets/{ticket}/attachments', [AttachmentController::class, 'store'])->name('tickets.attachments.store');
     
     // Admin-only configuration routes
     Route::middleware(['auth', \App\Http\Middleware\CheckUserRole::class . ':admin'])->prefix('admin')->name('admin.')->group(function () {
-        Route::resource('categories', CategoryController::class)->except(['show']);
-        Route::resource('departments', DepartmentController::class)->except(['show']);
-        Route::resource('priorities', PriorityController::class)->except(['show']);
-        Route::resource('statuses', StatusController::class)->except(['show']);
-        Route::resource('types', TypeController::class)->except(['show']);
-        Route::resource('users', UserController::class)->except(['show']);
+        Route::resource('categories', CategoryController::class);
+        Route::resource('departments', DepartmentController::class);
+        Route::resource('priorities', PriorityController::class);
+        Route::resource('statuses', StatusController::class);
+        Route::resource('types', TypeController::class);
+        Route::resource('users', UserController::class);
     });
 });

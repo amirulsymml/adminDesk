@@ -23,13 +23,16 @@ class StatusRequest extends FormRequest
     {
         $rules = [
             'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:statuses,slug',
         ];
 
-        // For update, ignore the current status name
+        // For update, ignore the current status name and slug
         if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
             $rules['name'] .= ',' . $this->route('status')->id;
+            $rules['slug'] .= ',' . $this->route('status')->id;
         } else {
             $rules['name'] .= '|unique:statuses,name';
+            $rules['slug'] .= '|unique:statuses,slug';
         }
 
         return $rules;

@@ -49,6 +49,7 @@ class TicketController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Ticket::class);
         $statuses = Status::all();
         $priorities = Priority::all();
         $types = Type::all();
@@ -111,6 +112,7 @@ class TicketController extends Controller
      */
     public function edit(Ticket $ticket)
     {
+        $this->authorize('update', $ticket);
         $statuses = Status::all();
         $priorities = Priority::all();
         $types = Type::all();

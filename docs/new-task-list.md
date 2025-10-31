@@ -76,14 +76,14 @@ Based on the PRD requirements and current project state analysis, this document 
 - [ ] Add ticket priority management
 
 #### Comment System
-- [ ] Finalize comment creation and display
+- [x] Finalize comment creation and display
 - [ ] Implement comment editing and deletion
 - [ ] Add comment notifications
 - [ ] Ensure proper comment threading
 
 #### Dashboard & Reporting
-- [ ] Implement dashboard with ticket statistics
-- [ ] Add recent tickets display
+- [x] Implement dashboard with ticket statistics
+- [x] Add recent tickets display
 - [ ] Create basic reporting functionality
 - [ ] Add ticket metrics and analytics
 
@@ -91,7 +91,7 @@ Based on the PRD requirements and current project state analysis, this document 
 - [ ] Enhance search functionality
 - [ ] Improve filter interface
 - [ ] Add advanced filtering options
-- [ ] Implement search result pagination
+- [x] Implement search result pagination
 
 ### 7. Testing & Quality Assurance
 - [ ] Write unit tests for all models
@@ -129,7 +129,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 // Ticket routes
 Route::resource('tickets', TicketController::class);
-Route::post('tickets/{ticket}/comments', [CommentController::class, 'store']);
+Route::post('tickets/{ticket}/comments', [CommentController::class, 'store'])->name('tickets.comments.store');
+Route::post('tickets/{ticket}/attachments', [AttachmentController::class, 'store'])->name('tickets.attachments.store');
 
 // Configuration routes (admin only)
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
